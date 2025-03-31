@@ -1,9 +1,7 @@
 package br.ufal.ic.p2.jackut.services;
 
-import br.ufal.ic.p2.jackut.exceptions.AddFriendException;
-import br.ufal.ic.p2.jackut.exceptions.LoginException;
-import br.ufal.ic.p2.jackut.exceptions.UserCreationException;
-import br.ufal.ic.p2.jackut.exceptions.UserUpdateException;
+import br.ufal.ic.p2.jackut.exceptions.*;
+import br.ufal.ic.p2.jackut.models.Message;
 import br.ufal.ic.p2.jackut.models.User;
 import br.ufal.ic.p2.jackut.repositories.UserRepository;
 
@@ -136,6 +134,38 @@ public class UserService {
         );
 
         return "{" + friends + "}";
+    }
+
+    public void enviarRecado(String sessionId, String destinatario, String recado) throws Exception {
+        User user = findUser(sessionId);
+        User receiver = findUser(destinatario);
+
+        if (user == null || receiver == null) throw new UserNotFoundException("Usuário não cadastrado.");
+
+        if (user.getLogin().equals(destinatario)) {
+            throw new Exception("Usuário não pode enviar recado para si mesmo.");
+        }
+
+        Message message = new Message(recado, user, receiver);
+        receiver.getMessages().add(message);
+    }
+
+    public String lerRecado(String sessionId) throws Exception {
+        User user = findUser(sessionId);
+
+        if (user == null) throw new UserNotFoundException("Usuário não cadastrado.");
+
+        List<Message> messages = user.getMessages();
+
+        if (messages.isEmpty()) {
+            throw new Exception("Não há recados.");
+        }
+
+        String message = messages.get(0).getContent();
+
+        messages.remove(0);
+
+        return message;
     }
 
     private void validateNewUser(String login, String senha, String nome) throws UserCreationException {

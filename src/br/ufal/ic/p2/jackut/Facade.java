@@ -1,9 +1,6 @@
 package br.ufal.ic.p2.jackut;
 
-import br.ufal.ic.p2.jackut.exceptions.AddFriendException;
-import br.ufal.ic.p2.jackut.exceptions.LoginException;
-import br.ufal.ic.p2.jackut.exceptions.UserCreationException;
-import br.ufal.ic.p2.jackut.exceptions.UserUpdateException;
+import br.ufal.ic.p2.jackut.exceptions.*;
 import br.ufal.ic.p2.jackut.services.UserService;
 
 public class Facade {
@@ -49,7 +46,13 @@ public class Facade {
         userService.encerrarSistema();
     }
 
+    public void enviarRecado(String id, String destinatario, String recado) throws Exception  {
+        userService.enviarRecado(id, destinatario, recado);
+    }
 
+    public String lerRecado(String id) throws Exception {
+        return userService.lerRecado(id);
+    }
 }
 
 

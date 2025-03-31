@@ -1,10 +1,8 @@
 package br.ufal.ic.p2.jackut.models;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class User implements Serializable {
     private String login;
@@ -13,6 +11,7 @@ public class User implements Serializable {
     private UserAttributes attributes;
     private List<User> friends;
     private List<User> friendsRequest;
+    private List<Message> messages;
 
     public User(String login, String senha, String nome) {
         this.login = login;
@@ -21,6 +20,7 @@ public class User implements Serializable {
         this.attributes = new UserAttributes();
         this.friends = new ArrayList<User>();
         this.friendsRequest = new ArrayList<User>();
+        this.messages = new ArrayList<Message>();
     }
 
     public String getLogin() {
@@ -43,6 +43,10 @@ public class User implements Serializable {
         return this.friendsRequest;
     }
 
+    public List<Message> getMessages() {
+        return this.messages;
+    }
+
     public void setLogin(String login) {
         this.login = login;
     }
@@ -58,7 +62,6 @@ public class User implements Serializable {
     public void addAttribute(String name, String value) {
         this.attributes.addAttribute(name, value);
     }
-
 
     public String getAttribute(String name) {
         return this.attributes.getAttribute(name);
