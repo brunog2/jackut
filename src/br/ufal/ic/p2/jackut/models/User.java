@@ -1,6 +1,9 @@
 package br.ufal.ic.p2.jackut.models;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class User implements Serializable {
@@ -8,12 +11,16 @@ public class User implements Serializable {
     private String senha;
     private String nome;
     private UserAttributes attributes;
+    private List<User> friends;
+    private List<User> friendsRequest;
 
     public User(String login, String senha, String nome) {
         this.login = login;
         this.senha = senha;
         this.nome = nome;
         this.attributes = new UserAttributes();
+        this.friends = new ArrayList<User>();
+        this.friendsRequest = new ArrayList<User>();
     }
 
     public String getLogin() {
@@ -26,6 +33,14 @@ public class User implements Serializable {
 
     public String getNome() {
         return this.nome;
+    }
+
+    public List<User> getFriends() {
+        return this.friends;
+    }
+
+    public List<User> getFriendsRequest() {
+        return this.friendsRequest;
     }
 
     public void setLogin(String login) {
@@ -44,18 +59,13 @@ public class User implements Serializable {
         this.attributes.addAttribute(name, value);
     }
 
+
     public String getAttribute(String name) {
         return this.attributes.getAttribute(name);
     }
 
-
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Usuário: %s (Login: %s)", this.nome, this.login));
-        for (Map.Entry<String, String> entry : this.attributes.getAllAttributes().entrySet()) {
-            sb.append(String.format(", %s: %s", entry.getKey(), entry.getValue()));
-        }
-        return sb.toString();
+      return this.login;
     }
 }

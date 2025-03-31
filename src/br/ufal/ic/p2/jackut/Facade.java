@@ -1,4 +1,6 @@
 package br.ufal.ic.p2.jackut;
+
+import br.ufal.ic.p2.jackut.exceptions.AddFriendException;
 import br.ufal.ic.p2.jackut.exceptions.LoginException;
 import br.ufal.ic.p2.jackut.exceptions.UserCreationException;
 import br.ufal.ic.p2.jackut.exceptions.UserUpdateException;
@@ -23,9 +25,20 @@ public class Facade {
         return userService.getAtributoUsuario(login, atributo);
     }
 
-
     public void editarPerfil(String id, String atributo, String valor) throws UserUpdateException {
         userService.editarPerfil(id, atributo, valor);
+    }
+
+    public boolean ehAmigo(String login, String amigo) {
+        return userService.ehAmigo(login, amigo, null, null);
+    }
+
+    public void adicionarAmigo(String login, String amigo) throws AddFriendException {
+        userService.adicionarAmigo(login, amigo);
+    }
+
+    public String getAmigos(String login) throws Exception {
+        return userService.getAmigos(login);
     }
 
     public void zerarSistema() {
