@@ -8,7 +8,7 @@ import java.util.List;
 public class SessionService {
     private List<String> sessoes;
 
-    SessionService() {
+    public SessionService() {
         this.sessoes = new ArrayList<>();
     }
 
