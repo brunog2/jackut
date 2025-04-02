@@ -6,30 +6,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Service responsible for managing user sessions in the Jackut system.
+ * Serviço responsável por gerenciar sessões de usuários no sistema Jackut.
  */
 public class SessionService {
     private List<String> sessoes;
 
     /**
-     * Constructor for the SessionService class.
-     * Initializes the list of sessions.
+     * Construtor da classe SessionService.
+     * Inicializa a lista de sessões.
      */
     public SessionService() {
         this.sessoes = new ArrayList<>();
     }
 
     /**
-     * Adds a session for a user.
+     * Adiciona uma sessão para um usuário.
      *
-     * @param user The user to add a session for.
+     * @param user O usuário para adicionar uma sessão.
      */
     public void addSession(User user) {
         sessoes.add(user.getLogin());
     }
 
     /**
-     * Removes all sessions.
+     * Remove todas as sessões.
      */
     public void removeSessions() {
         sessoes.clear();

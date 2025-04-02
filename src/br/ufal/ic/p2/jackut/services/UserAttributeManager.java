@@ -8,7 +8,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 /**
- * Class responsible for managing user attributes in the Jackut system.
+ * Classe responsável por gerenciar atributos de usuários no sistema Jackut.
  */
 public class UserAttributeManager {
     private static final Map<String, Function<User, String>> ATTRIBUTE_GETTERS = new HashMap<>();
@@ -25,11 +25,11 @@ public class UserAttributeManager {
     }
 
     /**
-     * Gets the value of a specified attribute for a user.
+     * Obtém o valor de um atributo especificado para um usuário.
      *
-     * @param user     The user whose attribute is to be retrieved.
-     * @param atributo The name of the attribute.
-     * @return The value of the attribute.
+     * @param user     O usuário cujo atributo deve ser recuperado.
+     * @param atributo O nome do atributo.
+     * @return O valor do atributo.
      */
     public String getAtributo(User user, String atributo) {
         Function<User, String> getter = ATTRIBUTE_GETTERS.get(atributo);
@@ -40,11 +40,11 @@ public class UserAttributeManager {
     }
 
     /**
-     * Sets the value of a specified attribute for a user.
+     * Define o valor de um atributo especificado para um usuário.
      *
-     * @param user     The user whose attribute is to be set.
-     * @param atributo The name of the attribute.
-     * @param valor    The value to set for the attribute.
+     * @param user     O usuário cujo atributo deve ser definido.
+     * @param atributo O nome do atributo.
+     * @param valor    O valor a ser definido para o atributo.
      */
     public void setAtributo(User user, String atributo, String valor) {
         BiConsumer<User, String> setter = ATTRIBUTE_SETTERS.get(atributo);

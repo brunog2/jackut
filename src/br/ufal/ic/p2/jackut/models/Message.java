@@ -3,7 +3,7 @@ package br.ufal.ic.p2.jackut.models;
 import java.io.Serializable;
 
 /**
- * Class representing a message in the Jackut system.
+ * Classe que representa uma mensagem no sistema Jackut.
  */
 public class Message implements Serializable {
     private String content;
@@ -11,11 +11,11 @@ public class Message implements Serializable {
     private User receiver;
 
     /**
-     * Constructor for the Message class.
+     * Construtor da classe Message.
      *
-     * @param content  The content of the message.
-     * @param sender   The user who sends the message.
-     * @param receiver The user who receives the message.
+     * @param content  O conteúdo da mensagem.
+     * @param sender   O usuário que envia a mensagem.
+     * @param receiver O usuário que recebe a mensagem.
      */
     public Message(String content, User sender, User receiver) {
         this.content = content;
@@ -24,27 +24,27 @@ public class Message implements Serializable {
     }
 
     /**
-     * Gets the content of the message.
+     * Obtém o conteúdo da mensagem.
      *
-     * @return The content of the message.
+     * @return O conteúdo da mensagem.
      */
     public String getContent() {
         return content;
     }
 
     /**
-     * Gets the sender of the message.
+     * Obtém o remetente da mensagem.
      *
-     * @return The user who sends the message.
+     * @return O usuário que envia a mensagem.
      */
     public User getSender() {
         return sender;
     }
 
     /**
-     * Gets the receiver of the message.
+     * Obtém o destinatário da mensagem.
      *
-     * @return The user who receives the message.
+     * @return O usuário que recebe a mensagem.
      */
     public User getReceiver() {
         return receiver;
