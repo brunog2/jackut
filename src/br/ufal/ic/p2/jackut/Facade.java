@@ -3,6 +3,7 @@ package br.ufal.ic.p2.jackut;
 import br.ufal.ic.p2.jackut.exceptions.*;
 import br.ufal.ic.p2.jackut.repositories.UserRepository;
 import br.ufal.ic.p2.jackut.services.*;
+import br.ufal.ic.p2.jackut.validators.UserValidator;
 
 /**
  * Facade para o sistema Jackut, responsável por gerenciar a interação entre os serviços.

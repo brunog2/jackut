@@ -3,6 +3,7 @@ package br.ufal.ic.p2.jackut.services;
 import br.ufal.ic.p2.jackut.exceptions.UserException;
 import br.ufal.ic.p2.jackut.models.User;
 import br.ufal.ic.p2.jackut.repositories.UserRepository;
+import br.ufal.ic.p2.jackut.validators.UserValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,9 @@ public class UserService {
     /**
      * Construtor do UserService.
      *
-     * @param userRepository        Repositório de usuários.
-     * @param userAttributeManager  Gerenciador de atributos de usuário.
-     * @param sessionService        Serviço de gerenciamento de sessões.
+     * @param userRepository       Repositório de usuários.
+     * @param userAttributeManager Gerenciador de atributos de usuário.
+     * @param sessionService       Serviço de gerenciamento de sessões.
      */
     public UserService(UserRepository userRepository, UserAttributeManager userAttributeManager, SessionService sessionService) {
         this.userRepository = userRepository;
@@ -39,7 +40,7 @@ public class UserService {
      * @throws UserException Se o login já estiver em uso ou os dados forem inválidos.
      */
     public void criarUsuario(String login, String senha, String nome) throws UserException {
-        this.validateNewUser(login, senha, nome);
+        UserValidator.validateNewUser(login, senha, nome, users);
         User user = new User(login, senha, nome);
         users.add(user);
     }
@@ -53,13 +54,9 @@ public class UserService {
      * @throws UserException Se o login ou senha forem inválidos.
      */
     public String abrirSessao(String login, String senha) throws UserException {
-        for (User user : users) {
-            if (user.getLogin().equals(login) && user.getSenha().equals(senha)) {
-                sessionService.addSession(user);
-                return login;
-            }
-        }
-        throw new UserException("Login ou senha inválidos.");
+        User user = UserValidator.validateLogin(login, senha, users);
+        sessionService.addSession(user);
+        return login;
     }
 
     /**
@@ -96,27 +93,6 @@ public class UserService {
             throw new UserException("Usuário não cadastrado.");
         }
         this.userAttributeManager.setAtributo(user, atributo, valor);
-    }
-
-    /**
-     * Valida os dados de um novo usuário antes da criação.
-     *
-     * @param login Nome de usuário.
-     * @param senha Senha do usuário.
-     * @param nome  Nome real do usuário.
-     * @throws UserException Se o login for inválido ou já existir.
-     */
-    private void validateNewUser(String login, String senha, String nome) throws UserException {
-        User user = getUser(login);
-        if (user != null) throw new UserException("Conta com esse nome já existe.");
-
-        if (login == null || login.isEmpty() || login.contains(" ")) {
-            throw new UserException("Login inválido.");
-        }
-
-        if (senha == null || senha.isEmpty()) {
-            throw new UserException("Senha inválida.");
-        }
     }
 
     /**
